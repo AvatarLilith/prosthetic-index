@@ -1,0 +1,286 @@
+[
+  {
+    "id": "summer-heart-clay-tether",
+    "title": "Summer_Heart_Clay_Tether",
+    "date": "2024-10-10",
+    "type": "Tether",
+    "shortDesc": "Summer made this when we were at the park.",
+    "longDesc": "",
+    "tags": [
+      "clay",
+      "gift",
+      "park",
+      "Summer"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "micayla-icecream-clay-tether",
+    "title": "Micayla_IceCream_Clay_Tether",
+    "date": "2024-10-10",
+    "type": "Tether",
+    "shortDesc": "Micayla made this when we were at the park.",
+    "longDesc": "",
+    "tags": [
+      "clay",
+      "gift",
+      "park",
+      "Micayla"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "ever-figurine-clay-tether",
+    "title": "Ever_Figurine_Clay_Tether",
+    "date": "2025-06-22",
+    "type": "Tether",
+    "shortDesc": "Ever made a green figurine for Six's Nostalgia playdate at my house.",
+    "longDesc": "",
+    "tags": [
+      "clay",
+      "figurine",
+      "green",
+      "Ever",
+      "Six",
+      "Nostalgia"
+    ],
+    "previewImage": "images/ever-figurine.jpg",
+    "hoverAsset": "images/ever-figurine.jpg",
+    "pageImage": "images/ever-figurine.jpg",
+    "externalLink": ""
+  },
+  {
+    "id": "wilson-botanical-rock-tether",
+    "title": "Wilson_BotanicalGarden_Rock_Tether",
+    "date": "2025-08-05",
+    "type": "Tether",
+    "shortDesc": "Wilson and I went on a date to the Botanical Garden. I picked up a rock from the Bonsai Collection.",
+    "longDesc": "",
+    "tags": [
+      "rock",
+      "Botanical Garden",
+      "Bonsai",
+      "Wilson",
+      "date"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "friends-28th-birthday-map",
+    "title": "Friends_28thBirthday_Home_CollaborativeDrawing",
+    "date": "2026-05-05",
+    "type": "Map",
+    "shortDesc": "My 28th birthday party. A collaborative drawing on my studio wall.",
+    "longDesc": "I layed out this piece of paper on my studio wall and invited friends to collaborate. This was the night I met Elia and Niels, it was a really lovely and important moment. They came to my door and I immediately felt their warmth. I asked my friends to bring a twig as an entry fee, and without even knowing me they abided by my silly rule. I love when I meet people that can commit to a creative bit and suspend a little bit of disbelief.",
+    "tags": [
+      "birthday",
+      "collaborative",
+      "drawing",
+      "studio",
+      "ritual"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "hackers-connected-matter-map",
+    "title": "Hackers_connectedmatterEd1_CollaborativeDrawing",
+    "date": "2023-02-05",
+    "type": "Map",
+    "shortDesc": "Collaborative drawing as part of our debut Edition 01, Suck My Code: Cyborgs and Sex.",
+    "longDesc": "A big piece of paper was laid out as an optional encouraged activity with a cup full of sharpened colored pencils on a pedestal next to it.",
+    "tags": [
+      "collaborative",
+      "drawing",
+      "Suck My Code",
+      "cyborgs",
+      "edition 01"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "dad-metal-project-clock",
+    "title": "Dad_MetalProject_Clock",
+    "date": "2025-09-45",
+    "type": "Sacred Object",
+    "shortDesc": "Dad's unfinished clock he made when he was my age.",
+    "longDesc": "I never knew he had made anything like this. It's fitting to be in the middle of understanding my own relationship to time, perfectionism, unfinished projects, and commitment. I miss him.",
+    "tags": [
+      "Dad",
+      "clock",
+      "metal",
+      "grief",
+      "unfinished",
+      "time"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "dad-house-item-box",
+    "title": "Dad_HouseItem_Box",
+    "date": "2024-01-03",
+    "type": "Sacred Object",
+    "shortDesc": "Dad's leather box from his home. I keep his metal projects and unfinished jewelry pieces inside.",
+    "longDesc": "I keep his metal projects and unfinished jewelry pieces he made when he was my age in here.",
+    "tags": [
+      "Dad",
+      "leather",
+      "box",
+      "jewelry",
+      "grief",
+      "inheritance"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "friends-park-ritual-map",
+    "title": "Friends_ParkRitual_FortGreene_CollectiveMap",
+    "date": "2025-06-21",
+    "type": "Map",
+    "shortDesc": "I invited several loved ones to join me for a park ritual.",
+    "longDesc": "",
+    "tags": [
+      "ritual",
+      "Fort Greene",
+      "park",
+      "collective",
+      "friends"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "friends-mind-map-day",
+    "title": "Friends_MindMapDay_Memory",
+    "date": "2025-04-06",
+    "type": "Memory",
+    "shortDesc": "Six, Diana, and Sylvia came over and we mind mapped. Things that came up were echoes.",
+    "longDesc": "It was really fun.",
+    "tags": [
+      "mind map",
+      "Six",
+      "Diana",
+      "Sylvia",
+      "echoes",
+      "friends"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "buzz-ruth-paper-bag-tether",
+    "title": "Buzz_RuthPaperBag_Tether",
+    "date": "2026-01-07",
+    "type": "Tether",
+    "shortDesc": "We met via Facebook Marketplace. I bought an antique rotating date and time clock from him.",
+    "longDesc": "He was giving away his late mother's estate for years. We spoke for an hour about archiving, history, grief, and loss. I asked him if he regretted giving anything away and he said no, quite definitively. To him, photographs held the most value. His Mom's name was Ruth. He gave me the clock inside the paper bag.",
+    "tags": [
+      "Facebook Marketplace",
+      "clock",
+      "Ruth",
+      "Buzz",
+      "grief",
+      "archiving",
+      "stranger"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "brandon-flower-clay-tether",
+    "title": "Brandon_Flower_Clay_Tether",
+    "date": "2026-02-16",
+    "type": "Tether",
+    "shortDesc": "Brandon made this after our Birthday trip. I wouldn't let him throw it out.",
+    "longDesc": "",
+    "tags": [
+      "clay",
+      "Brandon",
+      "birthday",
+      "flower"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "lauve-letter-tether",
+    "title": "Lauve_Letter_Tether",
+    "date": "2026-03-25",
+    "type": "Tether",
+    "shortDesc": "Lauve left me this letter after we house swapped.",
+    "longDesc": "She was so sweet, kind, and considerate. It was great getting to know her better.",
+    "tags": [
+      "letter",
+      "Lauve",
+      "house swap",
+      "kindness"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "diana-dragonfruit-tether",
+    "title": "Diana_Dragonfruit_Tether",
+    "date": "2025-12-23",
+    "type": "Tether",
+    "shortDesc": "A dragonfruit Diana gave me after we hosted our dinner party.",
+    "longDesc": "",
+    "tags": [
+      "Diana",
+      "food",
+      "gift",
+      "dinner party"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  },
+  {
+    "id": "wilson-leaf-clay-tether",
+    "title": "Wilson_Leaf_Clay_Tether",
+    "date": "2026-02-23",
+    "type": "Tether",
+    "shortDesc": "Wilson made this leaf out of clay. He was really focused.",
+    "longDesc": "",
+    "tags": [
+      "clay",
+      "Wilson",
+      "gift"
+    ],
+    "previewImage": "",
+    "hoverAsset": "",
+    "pageImage": "",
+    "externalLink": ""
+  }
+]
