@@ -436,15 +436,12 @@
       align-items: center;
       padding: 8px 0;
       grid-template-columns: none;
-      border-bottom: 1px solid var(--rule);
       margin-bottom: 8px;
     }
 
-    .table-header .col-item,
-    .table-header .col-desc,
-    .table-header .col-thumb,
-    .table-header span:nth-child(3),
-    .table-header span:nth-child(4) { display: none; }
+    .table-header .col-thumb { display: none; }
+    .table-header .col-desc { display: none; }
+
 
     .filter-bar { flex-wrap: wrap; gap: 4px; }
 
@@ -498,8 +495,7 @@
       margin-top: 6px;
     }
 
-    /* Mobile: no floating preview */
-    .hover-preview { display: none; }
+    /* Mobile: preview shown on long press */
 
     .detail-inner { padding: 32px 16px 80px; }
 
@@ -528,9 +524,9 @@
 
   <div class="table-header" style="align-items:center;">
     <span></span>
-    <span id="date-sort" onclick="toggleSort()" style="cursor:pointer; user-select:none;">Date <span id="sort-arrow">▾</span></span>
+    <span id="date-sort" onclick="toggleSort()" style="cursor:pointer; user-select:none;">Date <span id="sort-arrow" style="font-size:10px; vertical-align:middle;">▼</span></span>
     <span>Item</span>
-    <span>Description</span>
+    <span></span>
     <span style="text-align:right; display:flex; justify-content:flex-end; align-items:center; gap:8px;">Type<div class="filter-bar" id="filter-bar"></div></span>
   </div>
 
@@ -820,7 +816,7 @@ function getSorted() {
 
 function toggleSort() {
   sortDesc = !sortDesc;
-  document.getElementById('sort-arrow').textContent = sortDesc ? '▾' : '▴';
+  document.getElementById('sort-arrow').textContent = sortDesc ? '▼' : '▲';
   renderList();
 }
 
@@ -829,7 +825,7 @@ function renderList() {
   const list = document.getElementById('entries-list');
   const sorted = getSorted();
   list.innerHTML = sorted.map((e) => `
-    <div class="entry" onclick="openDetail(${e.originalIndex})">
+    <div class="entry" onclick="openDetail(${e.originalIndex})" data-idx="${e.originalIndex}">
       <div class="entry-thumb">${e.previewImage ? `<img src="${e.previewImage}" alt="${e.title}" onerror="this.style.display='none'" />` : '<div class="entry-thumb-placeholder"></div>'}</div>
       <div class="entry-date" onmouseenter="showPreview(${e.originalIndex})" onmouseleave="hidePreview()">${e.date}</div>
       <div class="entry-item" onmouseenter="showPreview(${e.originalIndex})" onmouseleave="hidePreview()">${e.title}</div>
@@ -1277,6 +1273,29 @@ function populate(data) {
   });
   renderList();
 }
+
+// ── LONG PRESS ON MOBILE ──
+let longPressTimer = null;
+
+document.getElementById('entries-list').addEventListener('touchstart', function(e) {
+  const entry = e.target.closest('.entry');
+  if (!entry) return;
+  const idx = entry.dataset.idx;
+  if (idx === undefined) return;
+  longPressTimer = setTimeout(() => {
+    e.preventDefault();
+    showPreview(parseInt(idx));
+  }, 500);
+}, { passive: true });
+
+document.getElementById('entries-list').addEventListener('touchend', function(e) {
+  clearTimeout(longPressTimer);
+  hidePreview();
+});
+
+document.getElementById('entries-list').addEventListener('touchmove', function(e) {
+  clearTimeout(longPressTimer);
+});
 
 loadEntries();
 </script>
