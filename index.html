@@ -1219,7 +1219,7 @@ async function loadEntries() {
 
 function populate(data) {
   entries.length = 0;
-  data.forEach(row => {
+  data.filter(row => !row.draft).forEach(row => {
     entries.push({
       id: row.id || '',
       title: row.title || '',

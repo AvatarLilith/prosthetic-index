@@ -60,6 +60,7 @@
     "title": "Wilson_BotanicalGarden_Rock_Tether",
     "date": "2025-08-05",
     "type": "Tether",
+    "draft": true,
     "shortDesc": "Wilson and I went on a date to the Botanical Garden. I picked up a rock from the Bonsai Collection.",
     "longDesc": "",
     "tags": [
@@ -79,6 +80,7 @@
     "title": "Friends_28thBirthday_Home_CollaborativeDrawing",
     "date": "2026-05-05",
     "type": "Map",
+    "draft": true,
     "shortDesc": "My 28th birthday party. A collaborative drawing on my studio wall.",
     "longDesc": "I layed out this piece of paper on my studio wall and invited friends to collaborate. This was the night I met Elia and Niels, it was a really lovely and important moment. They came to my door and I immediately felt their warmth. I asked my friends to bring a twig as an entry fee, and without even knowing me they abided by my silly rule. I love when I meet people that can commit to a creative bit and suspend a little bit of disbelief.",
     "tags": [
@@ -98,6 +100,7 @@
     "title": "Hackers_connectedmatterEd1_CollaborativeDrawing",
     "date": "2023-02-05",
     "type": "Map",
+    "draft": true,
     "shortDesc": "Collaborative drawing as part of our debut Edition 01, Suck My Code: Cyborgs and Sex.",
     "longDesc": "A big piece of paper was laid out as an optional encouraged activity with a cup full of sharpened colored pencils on a pedestal next to it.",
     "tags": [
@@ -157,6 +160,7 @@
     "title": "Friends_ParkRitual_FortGreene_CollectiveMap",
     "date": "2025-06-21",
     "type": "Map",
+    "draft": true,
     "shortDesc": "I invited several loved ones to join me for a park ritual.",
     "longDesc": "",
     "tags": [
@@ -176,6 +180,7 @@
     "title": "Friends_MindMapDay_Memory",
     "date": "2025-04-06",
     "type": "Memory",
+    "draft": true,
     "shortDesc": "Six, Diana, and Sylvia came over and we mind mapped. Things that came up were echoes.",
     "longDesc": "It was really fun.",
     "tags": [
