@@ -26,7 +26,6 @@
     background: var(--paper);
     color: var(--ink);
     font-family: 'Inter', sans-serif;
-    min-height: 100vh;
     cursor: default;
   }
 
@@ -67,11 +66,7 @@
     margin-bottom: 0;
   }
 
-  @media (max-width: 600px) {
-    .archive-header {
-      padding-top: 24px;
-    }
-  }
+
 
   .sticky-header {
     position: sticky;
@@ -132,7 +127,7 @@
     padding: 14px 12px;
     cursor: pointer;
     position: relative;
-    transition: background 0.12s ease;
+    transition: none;
     align-items: start;
   }
 
@@ -467,7 +462,8 @@
 
   /* ── MOBILE ── */
   @media (max-width: 600px) {
-    #index-view { padding: 24px 16px 100px; }
+    #index-view { padding: 0 16px 0; }
+    .archive-header { padding-top: 20px; }
 
     .archive-title { font-size: 26px; margin-bottom: 24px; white-space: nowrap; }
     .archive-title br { display: block; white-space: normal; }
@@ -1317,38 +1313,37 @@ function populate(data) {
 // ── LONG PRESS ON MOBILE ──
 let longPressTimer = null;
 
-// ── MOBILE: active zone highlight as you scroll ──
-const ACTIVE_ZONE = 0.4; // 40% down the viewport
-let activeEntry = null;
+// ── MOBILE: active zone — runs every frame, no caching ──
+const ACTIVE_ZONE = 0.4;
 
 function updateActiveEntry() {
-  if (window.innerWidth > 600) return;
+  if (window.innerWidth > 600) {
+    requestAnimationFrame(updateActiveEntry);
+    return;
+  }
   const zoneY = window.innerHeight * ACTIVE_ZONE;
-  const entries = document.querySelectorAll('.entry');
   let found = null;
 
-  entries.forEach(entry => {
+  document.querySelectorAll('.entry').forEach(entry => {
     const rect = entry.getBoundingClientRect();
-    if (rect.top <= zoneY && rect.bottom >= zoneY) {
+    const active = rect.top <= zoneY && rect.bottom >= zoneY;
+    if (active) {
       found = entry;
+      if (!entry.classList.contains('touch-hover')) {
+        entry.classList.add('touch-hover');
+        const idx = parseInt(entry.dataset.idx);
+        if (!isNaN(idx)) showPreview(idx);
+      }
+    } else {
+      entry.classList.remove('touch-hover');
     }
   });
 
-  if (found !== activeEntry) {
-    if (activeEntry) activeEntry.classList.remove('touch-hover');
-    activeEntry = found;
-    if (activeEntry) {
-      activeEntry.classList.add('touch-hover');
-      const idx = parseInt(activeEntry.dataset.idx);
-      if (!isNaN(idx)) showPreview(idx);
-    } else {
-      hidePreview();
-    }
-  }
+  if (!found) hidePreview();
+  requestAnimationFrame(updateActiveEntry);
 }
 
-window.addEventListener('scroll', updateActiveEntry, { passive: true });
-document.addEventListener('scroll', updateActiveEntry, { passive: true });
+requestAnimationFrame(updateActiveEntry);
 
 loadEntries();
 </script>
