@@ -430,7 +430,21 @@
     .archive-title { font-size: 26px; margin-bottom: 24px; white-space: nowrap; }
     .archive-title br { display: block; white-space: normal; }
 
-    .table-header { display: none; }
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      grid-template-columns: none;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 8px;
+    }
+
+    .table-header .col-item,
+    .table-header .col-desc,
+    .table-header .col-thumb,
+    .table-header span:nth-child(3),
+    .table-header span:nth-child(4) { display: none; }
 
     .filter-bar { flex-wrap: wrap; gap: 4px; }
 
