@@ -1317,32 +1317,38 @@ function populate(data) {
 // ── LONG PRESS ON MOBILE ──
 let longPressTimer = null;
 
-// ── MOBILE: show image + hover on touch, clear on scroll ──
-let touchMoved = false;
+// ── MOBILE: active zone highlight as you scroll ──
+const ACTIVE_ZONE = 0.4; // 40% down the viewport
+let activeEntry = null;
 
-document.getElementById('entries-list').addEventListener('touchstart', function(e) {
-  touchMoved = false;
-  const entry = e.target.closest('.entry');
-  if (!entry) return;
-  const idx = parseInt(entry.dataset.idx);
-  if (isNaN(idx)) return;
-  // Add hover class to entry
-  entry.classList.add('touch-hover');
-  // Show image preview
-  showPreview(idx);
-}, { passive: true });
+function updateActiveEntry() {
+  if (window.innerWidth > 600) return;
+  const zoneY = window.innerHeight * ACTIVE_ZONE;
+  const entries = document.querySelectorAll('.entry');
+  let found = null;
 
-document.getElementById('entries-list').addEventListener('touchmove', function(e) {
-  touchMoved = true;
-  // Clear hover and image as soon as scroll starts
-  document.querySelectorAll('.entry.touch-hover').forEach(el => el.classList.remove('touch-hover'));
-  hidePreview();
-}, { passive: true });
+  entries.forEach(entry => {
+    const rect = entry.getBoundingClientRect();
+    if (rect.top <= zoneY && rect.bottom >= zoneY) {
+      found = entry;
+    }
+  });
 
-document.getElementById('entries-list').addEventListener('touchend', function(e) {
-  document.querySelectorAll('.entry.touch-hover').forEach(el => el.classList.remove('touch-hover'));
-  hidePreview();
-}, { passive: true });
+  if (found !== activeEntry) {
+    if (activeEntry) activeEntry.classList.remove('touch-hover');
+    activeEntry = found;
+    if (activeEntry) {
+      activeEntry.classList.add('touch-hover');
+      const idx = parseInt(activeEntry.dataset.idx);
+      if (!isNaN(idx)) showPreview(idx);
+    } else {
+      hidePreview();
+    }
+  }
+}
+
+window.addEventListener('scroll', updateActiveEntry, { passive: true });
+document.addEventListener('scroll', updateActiveEntry, { passive: true });
 
 loadEntries();
 </script>
