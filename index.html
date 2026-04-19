@@ -30,9 +30,22 @@
 
   /* ── INDEX VIEW ── */
   #index-view {
+    position: relative;
     max-width: 1000px;
     margin: 0 auto;
     padding: 60px 32px 120px;
+  }
+
+  #index-view::after {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 280px;
+    background: linear-gradient(to bottom, transparent 0%, var(--paper) 100%);
+    pointer-events: none;
+    z-index: 10;
   }
 
   .archive-header {
@@ -58,7 +71,7 @@
 
   .table-header {
     display: grid;
-    grid-template-columns: 100px 220px 1fr 100px;
+    grid-template-columns: 48px 100px 220px 1fr 100px;
     gap: 0 24px;
     padding: 8px 12px;
     font-family: 'Times New Roman', Times, serif;
@@ -73,7 +86,7 @@
   /* ── ENTRY ROW ── */
   .entry {
     display: grid;
-    grid-template-columns: 100px 220px 1fr 100px;
+    grid-template-columns: 48px 100px 220px 1fr 100px;
     gap: 0 24px;
     padding: 14px 12px;
     cursor: pointer;
@@ -90,9 +103,31 @@
   .entry:hover .entry-date,
   .entry:hover .entry-item,
   .entry:hover .entry-desc,
-  .entry:hover .entry-type {
+  .entry:hover .entry-type,
+  .entry:hover .entry-thumb img {
     color: #ff0000;
     filter: blur(1.2px);
+  }
+
+  .entry-thumb {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .entry-thumb img {
+    max-width: 40px;
+    max-height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px rgba(64, 224, 208, 0.7));
+  }
+
+  .entry-thumb-placeholder {
+    width: 40px;
+    height: 40px;
   }
 
   .entry-date {
@@ -115,7 +150,7 @@
     font-family: 'Times New Roman', Times, serif;
     font-size: 15px;
     line-height: 1.65;
-    color: #555;
+    color: var(--muted);
     font-style: italic;
   }
 
@@ -147,19 +182,21 @@
   .filter-chip {
     font-family: 'Inter', sans-serif;
     font-size: 10px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+    padding: 2px 6px 2px 9px;
+    border-radius: 2px;
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 5px;
     cursor: default;
     white-space: nowrap;
   }
 
   .filter-chip .chip-remove {
     cursor: pointer;
-    font-size: 10px;
+    font-size: 12px;
     color: var(--muted);
     transition: color 0.15s;
     line-height: 1;
@@ -187,27 +224,27 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 280px;
-    height: 280px;
+    width: 320px;
+    height: 320px;
     pointer-events: none;
     z-index: 50;
     opacity: 0;
     transition: opacity 0.2s ease;
-    border-radius: 3px;
-    overflow: hidden;
-    background: var(--paper-dark);
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15), 0 4px 16px rgba(0,0,0,0.08);
   }
+
+
 
   .hover-preview.visible { opacity: 1; }
 
   .hover-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 75%;
+    max-height: 75%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px rgba(64, 224, 208, 0.9)) drop-shadow(0 0 24px rgba(64, 224, 208, 0.5));
   }
 
   .hover-preview-placeholder {
@@ -229,6 +266,11 @@
     z-index: 100;
     overflow-y: auto;
     animation: fadeIn 0.2s ease;
+    color: #ff0000;
+  }
+
+  #detail-view * {
+    color: #ff0000 !important;
   }
 
   #detail-view.visible { display: block; }
@@ -296,19 +338,18 @@
     width: 100%;
     max-width: 420px;
     aspect-ratio: 1;
-    background: radial-gradient(ellipse at 40% 40%, #d4dbe8 0%, #c5cdd9 50%, var(--paper-dark) 100%);
-    border-radius: 3px;
+    background: transparent;
     margin-bottom: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
   }
 
   .detail-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 18px rgba(64, 224, 208, 0.9)) drop-shadow(0 0 40px rgba(64, 224, 208, 0.5));
   }
 
   .detail-image-placeholder {
@@ -328,10 +369,8 @@
     font-size: 10px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--muted);
+    color: #ff0000;
     margin-bottom: 8px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--rule);
   }
 
   .detail-short-desc {
@@ -344,7 +383,7 @@
   .detail-long-desc {
     font-size: 15px;
     line-height: 1.8;
-    color: #444;
+    color: var(--muted);
   }
 
   .detail-tags {
@@ -356,7 +395,7 @@
   .detail-related {
     font-size: 15px;
     line-height: 1.8;
-    color: #444;
+    color: var(--muted);
   }
 
   .detail-related span {
@@ -364,12 +403,12 @@
   }
 
   .related-link {
-    color: #444;
+    color: var(--muted);
     text-decoration: none;
     cursor: pointer;
   }
 
-  .related-link:hover { color: #444; font-weight: 700; }
+  .related-link:hover { color: var(--muted); font-weight: 700; }
 
   .external-link {
     display: inline-flex;
@@ -386,18 +425,40 @@
 
   /* ── MOBILE ── */
   @media (max-width: 600px) {
-    #index-view { padding: 40px 20px 80px; }
+    #index-view {
+    position: relative; padding: 40px 20px 80px; }
 
     .table-header { display: none; }
 
     .entry {
-      grid-template-columns: 1fr auto;
+      grid-template-columns: 48px 1fr auto;
       grid-template-rows: auto auto auto;
       gap: 0 12px;
       padding: 16px 12px;
     }
 
-    .entry-date { grid-column: 2; grid-row: 1; text-align: right; }
+    .entry-thumb {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .entry-thumb img {
+    max-width: 40px;
+    max-height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 4px rgba(64, 224, 208, 0.7));
+  }
+
+  .entry-thumb-placeholder {
+    width: 40px;
+    height: 40px;
+  }
+
+  .entry-date { grid-column: 2; grid-row: 1; text-align: right; }
     .entry-item { grid-column: 1; grid-row: 1; font-size: 14px; }
     .entry-desc { grid-column: 1 / 3; grid-row: 2; margin-top: 6px; }
     .entry-type { grid-column: 1 / 3; grid-row: 3; text-align: left; margin-top: 4px; }
@@ -414,17 +475,19 @@
 
 <!-- HOVER PREVIEW -->
 <div class="hover-preview" id="hover-preview">
-  <span class="hover-preview-placeholder">[ image ]</span>
+  <img class="hover-preview-img" id="hover-preview-img" src="" alt="" style="display:none;" />
+  <span class="hover-preview-placeholder" id="hover-preview-ph">[ image ]</span>
 </div>
 
 <!-- INDEX -->
 <div id="index-view">
   <div class="archive-header">
-    <h1 class="archive-title">Avatar Lilith's Prosthetic Index<br>(Archive 5.0)</h1>
+    <h1 class="archive-title">Avatar Lilith's Prosthetic Index (Archive 5.0)</h1>
 
   </div>
 
   <div class="table-header" style="align-items:center;">
+    <span></span>
     <span id="date-sort" onclick="toggleSort()" style="cursor:pointer; user-select:none;">Date <span id="sort-arrow">▾</span></span>
     <span>Item</span>
     <span>Description</span>
@@ -726,14 +789,12 @@ function renderList() {
   const list = document.getElementById('entries-list');
   const sorted = getSorted();
   list.innerHTML = sorted.map((e) => `
-    <div class="entry" 
-         onclick="openDetail(${e.originalIndex})"
-         onmouseenter="showPreview(${e.originalIndex})"
-         onmouseleave="hidePreview()">
-      <div class="entry-date">${e.date}</div>
-      <div class="entry-item">${e.title}</div>
-      <div class="entry-desc">${e.shortDesc}</div>
-      <div class="entry-type" onclick="event.stopPropagation(); addFilter('${e.type}')" style="cursor:pointer;">${e.type}</div>
+    <div class="entry" onclick="openDetail(${e.originalIndex})">
+      <div class="entry-thumb">${e.previewImage ? `<img src="${e.previewImage}" alt="${e.title}" onerror="this.style.display='none'" />` : '<div class="entry-thumb-placeholder"></div>'}</div>
+      <div class="entry-date" onmouseenter="showPreview(${e.originalIndex})" onmouseleave="hidePreview()">${e.date}</div>
+      <div class="entry-item" onmouseenter="showPreview(${e.originalIndex})" onmouseleave="hidePreview()">${e.title}</div>
+      <div class="entry-desc" onmouseenter="showPreview(${e.originalIndex})" onmouseleave="hidePreview()">${e.shortDesc}</div>
+      <div class="entry-type" onmouseenter="showPreview(${e.originalIndex})" onmouseleave="hidePreview()" onclick="event.stopPropagation(); addFilter('${e.type}')" style="cursor:pointer;">${e.type}</div>
 
     </div>
   `).join('');
@@ -743,12 +804,18 @@ function renderList() {
 function showPreview(i) {
   const e = entries[i];
   const preview = document.getElementById('hover-preview');
+  const img = document.getElementById('hover-preview-img');
+  const ph = document.getElementById('hover-preview-ph');
   if (!preview) return;
 
   if (e.hoverAsset) {
-    preview.innerHTML = `<img src="${e.hoverAsset}" alt="${e.title}" onerror="this.parentNode.innerHTML='<span class=hover-preview-placeholder>[ image ]</span>'" />`;
+    img.src = e.hoverAsset;
+    img.style.display = '';
+    ph.style.display = 'none';
   } else {
-    preview.innerHTML = `<span class="hover-preview-placeholder">[ ${e.type.toLowerCase()} ]</span>`;
+    img.style.display = 'none';
+    ph.style.display = '';
+    ph.textContent = '[ ' + e.type.toLowerCase() + ' ]';
   }
 
   preview.classList.add('visible');
@@ -851,32 +918,324 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeDetail();
 });
 
-// ── LOAD FROM data.json ──
+// ── EMBEDDED DATA (fallback for local preview) ──
+const EMBEDDED_DATA = [
+  {
+    "id": "summer-heart-clay-tether",
+    "title": "Summer_Heart_Clay_Tether",
+    "date": "2024-10-10",
+    "type": "Tether",
+    "shortDesc": "Summer made this when we were at the park.",
+    "longDesc": "",
+    "tags": [
+      "clay",
+      "gift",
+      "park",
+      "Summer"
+    ],
+    "previewImage": "images/Summer_Heart_Clay_Tether.png",
+    "hoverAsset": "images/Summer_Heart_Clay_Tether.png",
+    "pageImage": "images/Summer_Heart_Clay_Tether.png",
+    "externalLink": ""
+  },
+  {
+    "id": "micayla-icecream-clay-tether",
+    "title": "Micayla_IceCream_Clay_Tether",
+    "date": "2024-10-10",
+    "type": "Tether",
+    "shortDesc": "Micayla made this when we were at the park.",
+    "longDesc": "",
+    "tags": [
+      "clay",
+      "gift",
+      "park",
+      "Micayla"
+    ],
+    "previewImage": "images/Micayla_IceCream_Clay_Tether.png",
+    "hoverAsset": "images/Micayla_IceCream_Clay_Tether.png",
+    "pageImage": "images/Micayla_IceCream_Clay_Tether.png",
+    "externalLink": ""
+  },
+  {
+    "id": "ever-figurine-clay-tether",
+    "title": "Ever_Figurine_Clay_Tether",
+    "date": "2025-06-22",
+    "type": "Tether",
+    "shortDesc": "Ever made a green figurine for Six's Nostalgia playdate at my house.",
+    "longDesc": "",
+    "tags": [
+      "clay",
+      "figurine",
+      "green",
+      "Ever",
+      "Six",
+      "Nostalgia"
+    ],
+    "previewImage": "images/Ever_Figurine_Clay_Tether.png",
+    "hoverAsset": "images/Ever_Figurine_Clay_Tether.png",
+    "pageImage": "images/Ever_Figurine_Clay_Tether.png",
+    "externalLink": ""
+  },
+  {
+    "id": "wilson-botanical-rock-tether",
+    "title": "Wilson_BotanicalGarden_Rock_Tether",
+    "date": "2025-08-05",
+    "type": "Tether",
+    "shortDesc": "Wilson and I went on a date to the Botanical Garden. I picked up a rock from the Bonsai Collection.",
+    "longDesc": "",
+    "tags": [
+      "rock",
+      "Botanical Garden",
+      "Bonsai",
+      "Wilson",
+      "date"
+    ],
+    "previewImage": "images/Wilson_BotanicalGarden_Rock_Tether.png",
+    "hoverAsset": "images/Wilson_BotanicalGarden_Rock_Tether.png",
+    "pageImage": "images/Wilson_BotanicalGarden_Rock_Tether.png",
+    "externalLink": ""
+  },
+  {
+    "id": "friends-28th-birthday-map",
+    "title": "Friends_28thBirthday_Home_CollaborativeDrawing",
+    "date": "2026-05-05",
+    "type": "Map",
+    "shortDesc": "My 28th birthday party. A collaborative drawing on my studio wall.",
+    "longDesc": "I layed out this piece of paper on my studio wall and invited friends to collaborate. This was the night I met Elia and Niels, it was a really lovely and important moment. They came to my door and I immediately felt their warmth. I asked my friends to bring a twig as an entry fee, and without even knowing me they abided by my silly rule. I love when I meet people that can commit to a creative bit and suspend a little bit of disbelief.",
+    "tags": [
+      "birthday",
+      "collaborative",
+      "drawing",
+      "studio",
+      "ritual"
+    ],
+    "previewImage": "images/Friends_28thBirthday_Home_CollaborativeDrawing.png",
+    "hoverAsset": "images/Friends_28thBirthday_Home_CollaborativeDrawing.png",
+    "pageImage": "images/Friends_28thBirthday_Home_CollaborativeDrawing.png",
+    "externalLink": ""
+  },
+  {
+    "id": "hackers-connected-matter-map",
+    "title": "Hackers_connectedmatterEd1_CollaborativeDrawing",
+    "date": "2023-02-05",
+    "type": "Map",
+    "shortDesc": "Collaborative drawing as part of our debut Edition 01, Suck My Code: Cyborgs and Sex.",
+    "longDesc": "A big piece of paper was laid out as an optional encouraged activity with a cup full of sharpened colored pencils on a pedestal next to it.",
+    "tags": [
+      "collaborative",
+      "drawing",
+      "Suck My Code",
+      "cyborgs",
+      "edition 01"
+    ],
+    "previewImage": "images/Hackers_connectedmatterEd1_CollaborativeDrawing.png",
+    "hoverAsset": "images/Hackers_connectedmatterEd1_CollaborativeDrawing.png",
+    "pageImage": "images/Hackers_connectedmatterEd1_CollaborativeDrawing.png",
+    "externalLink": ""
+  },
+  {
+    "id": "dad-metal-project-clock",
+    "title": "Dad_MetalProject_Clock",
+    "date": "2025-09-45",
+    "type": "Sacred Object",
+    "shortDesc": "Dad's unfinished clock he made when he was my age.",
+    "longDesc": "I never knew he had made anything like this. It's fitting to be in the middle of understanding my own relationship to time, perfectionism, unfinished projects, and commitment. I miss him.",
+    "tags": [
+      "Dad",
+      "clock",
+      "metal",
+      "grief",
+      "unfinished",
+      "time"
+    ],
+    "previewImage": "images/Dad_MetalProject_Clock.png",
+    "hoverAsset": "images/Dad_MetalProject_Clock.png",
+    "pageImage": "images/Dad_MetalProject_Clock.png",
+    "externalLink": ""
+  },
+  {
+    "id": "dad-house-item-box",
+    "title": "Dad_HouseItem_Box",
+    "date": "2024-01-03",
+    "type": "Sacred Object",
+    "shortDesc": "Dad's leather box from his home. I keep his metal projects and unfinished jewelry pieces inside.",
+    "longDesc": "I keep his metal projects and unfinished jewelry pieces he made when he was my age in here.",
+    "tags": [
+      "Dad",
+      "leather",
+      "box",
+      "jewelry",
+      "grief",
+      "inheritance"
+    ],
+    "previewImage": "images/Dad_HouseItem_Box.png",
+    "hoverAsset": "images/Dad_HouseItem_Box.png",
+    "pageImage": "images/Dad_HouseItem_Box.png",
+    "externalLink": ""
+  },
+  {
+    "id": "friends-park-ritual-map",
+    "title": "Friends_ParkRitual_FortGreene_CollectiveMap",
+    "date": "2025-06-21",
+    "type": "Map",
+    "shortDesc": "I invited several loved ones to join me for a park ritual.",
+    "longDesc": "",
+    "tags": [
+      "ritual",
+      "Fort Greene",
+      "park",
+      "collective",
+      "friends"
+    ],
+    "previewImage": "images/Friends_ParkRitual_FortGreene_CollectiveMap.png",
+    "hoverAsset": "images/Friends_ParkRitual_FortGreene_CollectiveMap.png",
+    "pageImage": "images/Friends_ParkRitual_FortGreene_CollectiveMap.png",
+    "externalLink": ""
+  },
+  {
+    "id": "friends-mind-map-day",
+    "title": "Friends_MindMapDay_Memory",
+    "date": "2025-04-06",
+    "type": "Memory",
+    "shortDesc": "Six, Diana, and Sylvia came over and we mind mapped. Things that came up were echoes.",
+    "longDesc": "It was really fun.",
+    "tags": [
+      "mind map",
+      "Six",
+      "Diana",
+      "Sylvia",
+      "echoes",
+      "friends"
+    ],
+    "previewImage": "images/Friends_MindMapDay_Memory.png",
+    "hoverAsset": "images/Friends_MindMapDay_Memory.png",
+    "pageImage": "images/Friends_MindMapDay_Memory.png",
+    "externalLink": ""
+  },
+  {
+    "id": "buzz-ruth-paper-bag-tether",
+    "title": "Buzz_RuthPaperBag_Tether",
+    "date": "2026-01-07",
+    "type": "Tether",
+    "shortDesc": "We met via Facebook Marketplace. I bought an antique rotating date and time clock from him.",
+    "longDesc": "He was giving away his late mother's estate for years. We spoke for an hour about archiving, history, grief, and loss. I asked him if he regretted giving anything away and he said no, quite definitively. To him, photographs held the most value. His Mom's name was Ruth. He gave me the clock inside the paper bag.",
+    "tags": [
+      "Facebook Marketplace",
+      "clock",
+      "Ruth",
+      "Buzz",
+      "grief",
+      "archiving",
+      "stranger"
+    ],
+    "previewImage": "images/Buzz_RuthPaperBag_Tether.png",
+    "hoverAsset": "images/Buzz_RuthPaperBag_Tether.png",
+    "pageImage": "images/Buzz_RuthPaperBag_Tether.png",
+    "externalLink": ""
+  },
+  {
+    "id": "brandon-flower-clay-tether",
+    "title": "Brandon_Flower_Clay_Tether",
+    "date": "2026-02-16",
+    "type": "Tether",
+    "shortDesc": "Brandon made this after our Birthday trip. I wouldn't let him throw it out.",
+    "longDesc": "",
+    "tags": [
+      "clay",
+      "Brandon",
+      "birthday",
+      "flower"
+    ],
+    "previewImage": "images/Brandon_Flower_Clay_Tether.png",
+    "hoverAsset": "images/Brandon_Flower_Clay_Tether.png",
+    "pageImage": "images/Brandon_Flower_Clay_Tether.png",
+    "externalLink": ""
+  },
+  {
+    "id": "lauve-letter-tether",
+    "title": "Lauve_Letter_Tether",
+    "date": "2026-03-25",
+    "type": "Tether",
+    "shortDesc": "Lauve left me this letter after we house swapped.",
+    "longDesc": "She was so sweet, kind, and considerate. It was great getting to know her better.",
+    "tags": [
+      "letter",
+      "Lauve",
+      "house swap",
+      "kindness"
+    ],
+    "previewImage": "images/Lauve_Letter_Tether.png",
+    "hoverAsset": "images/Lauve_Letter_Tether.png",
+    "pageImage": "images/Lauve_Letter_Tether.png",
+    "externalLink": ""
+  },
+  {
+    "id": "diana-dragonfruit-tether",
+    "title": "Diana_Dragonfruit_Tether",
+    "date": "2025-12-23",
+    "type": "Tether",
+    "shortDesc": "A dragonfruit Diana gave me after we hosted our dinner party.",
+    "longDesc": "",
+    "tags": [
+      "Diana",
+      "food",
+      "gift",
+      "dinner party"
+    ],
+    "previewImage": "images/Diana_Dragonfruit_Tether.png",
+    "hoverAsset": "images/Diana_Dragonfruit_Tether.png",
+    "pageImage": "images/Diana_Dragonfruit_Tether.png",
+    "externalLink": ""
+  },
+  {
+    "id": "wilson-leaf-clay-tether",
+    "title": "Wilson_Leaf_Clay_Tether",
+    "date": "2026-02-23",
+    "type": "Tether",
+    "shortDesc": "Wilson made this leaf out of clay. He was really focused.",
+    "longDesc": "",
+    "tags": [
+      "clay",
+      "Wilson",
+      "gift"
+    ],
+    "previewImage": "images/Wilson_Leaf_Clay_Tether.png",
+    "hoverAsset": "images/Wilson_Leaf_Clay_Tether.png",
+    "pageImage": "images/Wilson_Leaf_Clay_Tether.png",
+    "externalLink": ""
+  }
+]
+
 async function loadEntries() {
   try {
     const res = await fetch('data.json');
     const data = await res.json();
-    entries.length = 0;
-    data.forEach(row => {
-      entries.push({
-        id: row.id || '',
-        title: row.title || '',
-        date: row.date || '',
-        type: row.type || '',
-        shortDesc: row.shortDesc || '',
-        longDesc: row.longDesc || '',
-        tags: Array.isArray(row.tags) ? row.tags : [],
-        previewImage: row.previewImage || '',
-        hoverAsset: row.hoverAsset || '',
-        pageImage: row.pageImage || '',
-        externalLink: row.externalLink || '',
-        relatedObjects: []
-      });
-    });
-    renderList();
+    populate(data);
   } catch (err) {
-    console.error('Could not load data.json:', err);
+    // fallback to embedded data for local preview
+    populate(EMBEDDED_DATA);
   }
+}
+
+function populate(data) {
+  entries.length = 0;
+  data.forEach(row => {
+    entries.push({
+      id: row.id || '',
+      title: row.title || '',
+      date: row.date || '',
+      type: row.type || '',
+      shortDesc: row.shortDesc || '',
+      longDesc: row.longDesc || '',
+      tags: Array.isArray(row.tags) ? row.tags : [],
+      previewImage: row.previewImage || '',
+      hoverAsset: row.hoverAsset || '',
+      pageImage: row.pageImage || '',
+      externalLink: row.externalLink || '',
+      relatedObjects: []
+    });
+  });
+  renderList();
 }
 
 loadEntries();
