@@ -19,6 +19,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   a { text-decoration: none; }
   a:hover { text-decoration: none; }
+  html, body { height: 100%; overflow-x: hidden; }
 
   body {
     background: var(--paper);
@@ -63,6 +64,12 @@
   .archive-header {
     padding-top: 60px;
     margin-bottom: 0;
+  }
+
+  @media (max-width: 600px) {
+    .archive-header {
+      padding-top: 24px;
+    }
   }
 
   .sticky-header {
@@ -1308,24 +1315,29 @@ function populate(data) {
 // ── LONG PRESS ON MOBILE ──
 let longPressTimer = null;
 
+// ── MOBILE TOUCH PREVIEW ──
+// Show image as soon as finger touches, hide on lift or scroll
+const isMobile = () => window.matchMedia('(max-width: 600px)').matches;
+
 document.getElementById('entries-list').addEventListener('touchstart', function(e) {
+  if (!isMobile()) return;
   const entry = e.target.closest('.entry');
   if (!entry) return;
   const idx = entry.dataset.idx;
   if (idx === undefined) return;
-  longPressTimer = setTimeout(() => {
-    e.preventDefault();
-    showPreview(parseInt(idx));
-  }, 500);
-}, { passive: true });
+  // Prevent text selection
+  e.preventDefault();
+  showPreview(parseInt(idx));
+}, { passive: false });
 
 document.getElementById('entries-list').addEventListener('touchend', function(e) {
-  clearTimeout(longPressTimer);
+  if (!isMobile()) return;
   hidePreview();
 });
 
 document.getElementById('entries-list').addEventListener('touchmove', function(e) {
-  clearTimeout(longPressTimer);
+  if (!isMobile()) return;
+  hidePreview();
 });
 
 loadEntries();
