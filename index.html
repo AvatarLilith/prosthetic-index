@@ -425,49 +425,76 @@
 
   /* ── MOBILE ── */
   @media (max-width: 600px) {
-    #index-view {
-    position: relative; padding: 40px 20px 80px; }
+    #index-view { padding: 24px 16px 100px; }
+
+    .archive-title { font-size: 18px; margin-bottom: 24px; white-space: nowrap; }
+    .archive-title br { display: block; white-space: normal; }
 
     .table-header { display: none; }
 
+    .filter-bar { flex-wrap: wrap; gap: 4px; }
+
     .entry {
-      grid-template-columns: 48px 1fr auto;
+      grid-template-columns: 44px 1fr;
       grid-template-rows: auto auto auto;
-      gap: 0 12px;
-      padding: 16px 12px;
+      gap: 4px 12px;
+      padding: 14px 8px;
+      border-bottom: 1px solid var(--rule);
     }
 
     .entry-thumb {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
+      grid-column: 1;
+      grid-row: 1 / 3;
+      width: 44px;
+      height: 44px;
+      align-self: start;
+    }
 
-  .entry-thumb img {
-    max-width: 40px;
-    max-height: 40px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 4px rgba(64, 224, 208, 0.7));
-  }
+    .entry-thumb img {
+      max-width: 44px;
+      max-height: 44px;
+    }
 
-  .entry-thumb-placeholder {
-    width: 40px;
-    height: 40px;
-  }
+    .entry-item {
+      grid-column: 2;
+      grid-row: 1;
+      font-size: 13px;
+      line-height: 1.3;
+    }
 
-  .entry-date { grid-column: 2; grid-row: 1; text-align: right; }
-    .entry-item { grid-column: 1; grid-row: 1; font-size: 14px; }
-    .entry-desc { grid-column: 1 / 3; grid-row: 2; margin-top: 6px; }
-    .entry-type { grid-column: 1 / 3; grid-row: 3; text-align: left; margin-top: 4px; }
-    .entry-tags { grid-column: 1 / 3; }
+    .entry-desc {
+      grid-column: 2;
+      grid-row: 2;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 2px;
+    }
 
-    /* Mobile: no floating preview, tap opens detail directly */
+    .entry-date {
+      grid-column: 2;
+      grid-row: 3;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .entry-type {
+      grid-column: 2;
+      grid-row: 3;
+      text-align: right;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    /* Mobile: no floating preview */
     .hover-preview { display: none; }
 
-    .detail-inner { padding: 40px 20px 80px; }
+    .detail-inner { padding: 32px 16px 80px; }
+
+    .detail-title { font-size: 22px; }
+
+    .detail-image { max-width: 100%; }
+
+    .back-btn { margin-bottom: 28px; }
   }
 </style>
 </head>
@@ -482,7 +509,7 @@
 <!-- INDEX -->
 <div id="index-view">
   <div class="archive-header">
-    <h1 class="archive-title">Avatar Lilith's Prosthetic Index (Archive 5.0)</h1>
+    <h1 class="archive-title">Avatar Lilith's Prosthetic Index<br>(Archive 5.0)</h1>
 
   </div>
 
