@@ -19,7 +19,8 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   a { text-decoration: none; }
   a:hover { text-decoration: none; }
-  html, body { height: 100%; overflow-x: hidden; }
+  html { overflow: hidden; height: 100%; }
+  body { height: 100%; overflow-x: hidden; overflow-y: auto; }
 
   body {
     background: var(--paper);
@@ -34,7 +35,7 @@
     position: relative;
     max-width: 1000px;
     margin: 0 auto;
-    padding: 0 32px 120px;
+    padding: 0 32px 0;
   }
 
   #index-view::before {
@@ -135,16 +136,17 @@
     align-items: start;
   }
 
-  .entry:hover {
+  .entry:hover, .entry.touch-hover {
     background: transparent;
     text-shadow: 0 0 18px rgba(64, 224, 208, 0.9), 0 0 40px rgba(64, 224, 208, 0.5);
   }
 
-  .entry:hover .entry-date,
-  .entry:hover .entry-item,
-  .entry:hover .entry-desc,
-  .entry:hover .entry-type,
-  .entry:hover .entry-thumb img {
+
+  .entry:hover .entry-date, .entry.touch-hover .entry-date,
+  .entry:hover .entry-item, .entry.touch-hover .entry-item,
+  .entry:hover .entry-desc, .entry.touch-hover .entry-desc,
+  .entry:hover .entry-type, .entry.touch-hover .entry-type,
+  .entry:hover .entry-thumb img, .entry.touch-hover .entry-thumb img {
     color: #ff0000;
     filter: blur(1.2px);
   }
@@ -568,7 +570,7 @@
       <span style="text-align:right; display:flex; justify-content:flex-end; align-items:center; gap:8px;">Type<div class="filter-bar" id="filter-bar"></div></span>
     </div>
   </div>
-  <div id="entries-list"></div>
+  <div id="entries-list" style="padding-bottom: 120px;"></div>
 </div>
 
 <!-- DETAIL -->
@@ -1315,30 +1317,32 @@ function populate(data) {
 // ── LONG PRESS ON MOBILE ──
 let longPressTimer = null;
 
-// ── MOBILE TOUCH PREVIEW ──
-// Show image as soon as finger touches, hide on lift or scroll
-const isMobile = () => window.matchMedia('(max-width: 600px)').matches;
+// ── MOBILE: show image + hover on touch, clear on scroll ──
+let touchMoved = false;
 
 document.getElementById('entries-list').addEventListener('touchstart', function(e) {
-  if (!isMobile()) return;
+  touchMoved = false;
   const entry = e.target.closest('.entry');
   if (!entry) return;
-  const idx = entry.dataset.idx;
-  if (idx === undefined) return;
-  // Prevent text selection
-  e.preventDefault();
-  showPreview(parseInt(idx));
-}, { passive: false });
-
-document.getElementById('entries-list').addEventListener('touchend', function(e) {
-  if (!isMobile()) return;
-  hidePreview();
-});
+  const idx = parseInt(entry.dataset.idx);
+  if (isNaN(idx)) return;
+  // Add hover class to entry
+  entry.classList.add('touch-hover');
+  // Show image preview
+  showPreview(idx);
+}, { passive: true });
 
 document.getElementById('entries-list').addEventListener('touchmove', function(e) {
-  if (!isMobile()) return;
+  touchMoved = true;
+  // Clear hover and image as soon as scroll starts
+  document.querySelectorAll('.entry.touch-hover').forEach(el => el.classList.remove('touch-hover'));
   hidePreview();
-});
+}, { passive: true });
+
+document.getElementById('entries-list').addEventListener('touchend', function(e) {
+  document.querySelectorAll('.entry.touch-hover').forEach(el => el.classList.remove('touch-hover'));
+  hidePreview();
+}, { passive: true });
 
 loadEntries();
 </script>
